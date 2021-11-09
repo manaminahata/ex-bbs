@@ -2,6 +2,11 @@ package com.example.domain;
 
 import java.util.List;
 
+/**
+ * 投稿者の投稿に対して使用するドメインの作成
+ * @author manami
+ *
+ */
 public class Article {
 	// id
 	private Integer id;
