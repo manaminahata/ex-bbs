@@ -1,5 +1,10 @@
 package com.example.domain;
 
+/**
+ * コメント者のコメント内容について使用するドメインの作成
+ * @author manami
+ *
+ */
 public class Comment {
 	// id
 	private Integer id;
