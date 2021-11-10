@@ -32,7 +32,7 @@ public class CommentRepository {
 	 * @return
 	 */
 	public List<Comment> findByArticleId(int articleId) {
-		String findByArticleIdSql = "SELECT * FROM articles WHERE article_id=:articleId";
+		String findByArticleIdSql = "SELECT * FROM comments WHERE article_id=:articleId";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("articleId", articleId);
 		List<Comment> commentList = template.query(findByArticleIdSql, param, COMMENT_ROW_MAPPER);
 		return commentList;
@@ -42,9 +42,11 @@ public class CommentRepository {
 	 * commentにレコードの追加
 	 * @param commnet
 	 */
-	public void insert(Comment commnet) {
-		SqlParameterSource param = new BeanPropertySqlParameterSource(commnet);
-		String insertSql = "INSERT INTO comments(name, comment, article_id) VALUES :name, :comment, :articleId";
+	public void insert(Comment comment) {
+		String insertSql = "INSERT INTO comments(name, content, article_id) VALUES (:name, :content, :articleId)";
+		SqlParameterSource param = new BeanPropertySqlParameterSource(comment);
+		System.out.println(comment);
+		
 		template.update(insertSql, param);
 	}
 	
@@ -54,7 +56,7 @@ public class CommentRepository {
 	 */
 	public void deleteByArticleId(int articleId) {
 		String deleteByArticleIdSql = "DELETE FROM comments WHERE article_id=:articleId";
-		SqlParameterSource param = new MapSqlParameterSource().addValue("article_id", articleId);
+		SqlParameterSource param = new MapSqlParameterSource().addValue("articleId", articleId);
 		template.update(deleteByArticleIdSql, param);
 	}
 	
